@@ -1,83 +1,72 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
+<body></body>
 <head>
-    <meta charset="utf-8">
-    <title>Library Loan System</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="static/css/footer.css">
+  <meta charset="utf-8">
+  <title>Hi Dexter</title>
 </head>
+<style>
+ul {
+    list-style-type: none;
+    margin: 0 0 0 100px;
+    padding: 0;
+    overflow: hidden;
+    }
 
-{% block body %}
-    {% from "_formhelper.html" import render_field %}
+li {
+    float: left;
+	border-right: 1px solid #bbb
+}
+
+form {
+    text-align : center
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 50px 50px;
+	text-decoration: none;
+	background-color: #333;
+}
+
+li a:hover {
+    background-color: #0099ff;
+}
+</style>
+
+
+
+<div>
+</div>
+
+<body background="https://upload.wikimedia.org/wikipedia/commons/1/1d/Kawasaki_c751_eunos.jpg">
+<ul>
+    <li><a class="active" href="#home">Home</a></li>
+    <li><a href="#reportaproblem">Report a Problem</a></li>
+    <li><a href="#account">Login/Register</a></li>
+    <li><a href="#Excuse Pass">Proof for E-Excuse Pass for Train Breakdown</a>
+</ul>
+<div>
+<form method ="POST" action="">
     <h1>Problems</h1>
-
-    {% if form.errors %}
-        <div class="alert alert-danger">
-            <ul>
-                {% for field_name, field_errors in form.errors|dictsort if field_errors %}
-                    {% for error in field_errors %}
-                        <li>{{ form[field_name].label }}: {{ error }}</li>
-                    {% endfor %}
-                {% endfor %}
-            </ul>
-        </div>
-    {% endif %}
-    <form method="POST" action="">
-
+    <br>
         <div class="form-group">
             <div class="form-row">
                 {{ render_field(form.problem, class_="radio-inline") }}
             </div>
         </div>
+    <br>
+    Description:<br>
+    <input type="textfield" problem="Problem">
+    <br>
+    Location:<br>
+    <input type="text" location="Location">
+    <br>
+    <input type="submit" Value="submit">
+</form>
+</div>
+</body>
 
-
-        <div class="form-group">
-            <div class="form-row">
-                <div class="form-group col-md-4">
-                    {{ render_field(form.description, class_="form-control") }}
-                </div>
-                <div class="form-group col-md-4">
-                    {{ render_field(form.location, class_="form-control") }}
-                </div>
-
-            </div>
-        </div>
-
-
-
-
-
-
-
-{#            <div class="form-group">#}
-{#                <div class="form-row">#}
-{#                    <div class="form-group col-md-6">#}
-{#                        {{ render_field(form.issn, class_="form-control") }}#}
-{##}
-{#                    </div>#}
-{#                    <div class="form-group col-md-6">#}
-{#                        {{ render_field(form.frequency, class_="radio-inline") }}#}
-{##}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-        </div>
-
-
-        <div class="form-group">
-            <div class="form-row">
-                <div class="form-group col-md-11">
-
-
-                </div>
-                <div class="form-group col-md-1">
-                    <input type="submit" value="Submit" class="btn btn-info"/>
-                </div>
-            </div>
-        </div>
-
-    </form>
-
-
-{% endblock %}
+</html>
