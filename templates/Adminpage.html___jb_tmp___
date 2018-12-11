@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="static/css/footer.css">
 </head>
-
 {% block body %}
     <h1>View All Problems</h1>
     <br/>

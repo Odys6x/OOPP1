@@ -2,20 +2,9 @@ from flask import Flask, render_template, request, flash, redirect, url_for
 from wtforms import Form, StringField, TextAreaField, RadioField, SelectField, validators
 from Mrt import problemReq
 from Bus import ProblemReq
-import datetime
 import shelve
-# import firebase_admin
-# from firebase_admin import credentials, db
 
-# cred = credentials.Certificate('cred/library-system-a3843-firebase-adminsdk-av5pi-b432c9b613.json')
-# default_app = firebase_admin.initialize_app(cred, {
-#     'databaseURL': 'https://library-system-a3843.firebaseio.com/'
-#
-# })
-#
-# root = db.reference()
 app = Flask(__name__)
-
 
 
 @app.route('/')
@@ -23,9 +12,6 @@ def default():
     return render_template('Userpage.html')
 
 
-#@app.route('/home')
-#def home():
-#    return render_template('home.html')
 
 
 @app.route('/viewproblems')
@@ -43,25 +29,6 @@ def viewproblems():
         list.append(problems.get(pubid))
 
     return render_template('Adminpage.html', problems=list)
-
-    # publications = root.child('publications').get()
-    # list = [] #create a list to store all the publication objects
-    # print(publications)
-    # for pubid in publications:
-    #
-    #     eachpublication = publications[pubid]
-    #
-    #     if eachpublication['type'] == 'smag':
-    #         magazine = Magazine(eachpublication['title'], eachpublication['publisher'], eachpublication['status'], eachpublication['created_by'], eachpublication['category'], eachpublication['type'], eachpublication['frequency'])
-    #         magazine.set_pubid(pubid)
-    #         print(magazine.get_pubid())
-    #         list.append(magazine)
-    #     else:
-    #         book = Book(eachpublication['title'], eachpublication['publisher'], eachpublication['status'], eachpublication['created_by'], eachpublication['category'], eachpublication['type'], eachpublication['synopsis'], eachpublication['author'], eachpublication['isbn'])
-    #         book.set_pubid(pubid)
-    #         list.append(book)
-    #
-    # return render_template('view_all_publications.html', publications = list)
 
 class RequiredIf(object):
 
@@ -110,7 +77,7 @@ def delete_problem(id):
     # flash('Article Deleted', 'success')
     #
     # return redirect(url_for('viewpublications'))
-
+#this one u copy from lib portal? i delete first ahh^ cuz not needed or u alr implemented some stuff i implemented some stuff okk
 
 
 @app.route('/Adminpage')
@@ -131,7 +98,7 @@ class PublicationForm(Form):
 
 
 
-@app.route('/newpublication', methods=['GET', 'POST'])
+@app.route('/Userpage', methods=['GET', 'POST'])
 def new():
     form = PublicationForm(request.form)
 
@@ -185,7 +152,7 @@ def new():
         return redirect(url_for('Adminpage'))
 
 
-    return render_template('Userpage.html', form=form)
+    return render_template('Userpage.html', form= form)
 
 @app.route('/resolved/<int:id>/', methods=['GET', 'POST'])
 def resolved_problem(id):
@@ -327,3 +294,4 @@ def resolved_problem(id):
 if __name__ == '__main__':
 
     app.run()
+# i show u sthplplokok

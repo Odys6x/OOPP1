@@ -6,14 +6,13 @@
 
 
 class problemReq:
-    def __init__(self, problem ,other,description,location,datereported,username,status):
+    def __init__(self, problem,description,location,datereported,username):
         self.__problem = problem
-        self.__other = other
         self.__description = description
         self.__location = location
         self.__datereported = datereported
         self.__username = username
-        self.__status = status
+        self.__status = "pending"
 
     def get_problem(self):
         return self.__problem
