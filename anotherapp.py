@@ -5,11 +5,11 @@ from Bus import ProblemReq
 import shelve
 
 app = Flask(__name__)
-
+app.secret_key = 'secret123'
 
 @app.route('/')
 def default():
-    return render_template('Userpage.html')
+    return render_template('Adminpage.html')
 
 
 
@@ -30,7 +30,21 @@ def viewproblems():
 
     return render_template('Adminpage.html', problems=list)
 
+class PublicationForm(Form):
+    problem = RadioField('Type Of Problems', choices=[('smrt', 'Mrt'), ('sbus', 'Bus')])
+
+    description = TextAreaField('description')
+
+    location = StringField('location', [
+        validators.Length(min=1, max=100),
+        validators.DataRequired()])
+    status = SelectField('Status', [validators.DataRequired()],
+                         choices=[('', 'Select'), ('P', 'Pending'), ('A', 'Available For Borrowing'),
+                                  ])
+
+
 class RequiredIf(object):
+
 
     def __init__(self, *args, **kwargs):
         self.conditions = kwargs
@@ -80,21 +94,7 @@ def delete_problem(id):
 #this one u copy from lib portal? i delete first ahh^ cuz not needed or u alr implemented some stuff i implemented some stuff okk
 
 
-@app.route('/Adminpage')
 
-
-class PublicationForm(Form):
-    problem = RadioField('Type Of Problems', choices=[('smrt', 'Mrt'), ('sbus', 'Bus')], default='')
-
-    description = TextAreaField('description', [
-        RequiredIf(pubtype='smrt' or 'sbus')])
-
-    location = StringField('location', [
-        validators.Length(min=1, max=100),
-        validators.DataRequired()])
-    status = SelectField('Status', [validators.DataRequired()],
-                         choices=[('', 'Select'), ('P', 'Pending'), ('A', 'Available For Borrowing'),
-                                  ], default='')
 
 
 
@@ -191,10 +191,11 @@ def resolved_problem(id):
                 db_read.close()
 
                 flash('Problem resolved.', 'success')
+            return render_template('Userpage.html', form=form)
             return redirect(url_for('Adminpage'))
 
 
-            return render_template('Userpage.html', form=form)
+
     except:
         print("in ")
         pass
@@ -292,6 +293,5 @@ def resolved_problem(id):
     #     return render_template('update_publication.html', form=form)
 
 if __name__ == '__main__':
-
-    app.run()
+    app.run(debug = True)
 # i show u sthplplokok
