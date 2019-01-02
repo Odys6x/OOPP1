@@ -1,103 +1,111 @@
-{% extends 'layout.html' %}
 
-{% block body %}
-    {% from "includes/_formhelper.html" import render_field %}
-    <h1>New Publication</h1>
-    <script>
-        $(document).ready(function () {
-            $('#bus').show();
-            $('#mrt').hide();
+<!doctype html>
+<html lang="en">
+<head>
+	<title>Register</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="/static/UserM.css">
+    {%  from "includes/_formhelper.html" import render_field %}
+<style>
+.login100-form-btn {margin-bottom:50px}
+ul {
+    list-style-type: none;
+    margin: 0 0 0 100px;
+    padding: 0;
+    overflow: hidden;
+    }
 
-            $('input[type="radio"]').click(function () {
+li {
+    float: left;
+	border-right: 1px solid #bbb
+}
 
-                if ($(this).attr('value') == 'sbus') {
-                    $('#bus').show();
-                    $('#mrt').hide();
-                }
-                else {
-                    $('#mrt').show();
-                    $('#bus').hide();
-                }
-            });
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 50px 50px;
+	text-decoration: none;
+	background-color: #333;
+}
 
-            var publicationType = $('input[name=problem]:checked').val();
+li a:hover {
+    background-color: #0099ff;
+}
 
-            if (publicationType == 'sbus') {
-                $('#bus').show();
-                $('#mrt').hide();
-            } else {
-                $('#mrt').show();
-                $('#bus').hide();
-            }
-        });
-    </script>
-    {% if form.errors %}
-        <div class="alert alert-danger">
-            <ul>
-                {% for field_name, field_errors in form.errors|dictsort if field_errors %}
-                    {% for error in field_errors %}
-                        <li>{{ form[field_name].label }}: {{ error }}</li>
-                    {% endfor %}
-                {% endfor %}
-            </ul>
-        </div>
-    {% endif %}
-    <form method="POST" action="">
+.login100-form-btn {
+  font-size: 15px;
+  line-height: 1.5;
+  color: #fff;
+  text-transform: uppercase;
+  width: 100%;
+  height: 50px;
+  border-radius: 25px;
+  background-color: #333;
+  padding: 0 25px;
+  transition: all 0.4s;
+}
 
-        <div class="form-group">
-            <div class="form-row">
-                {{ render_field(form.problem, class_="radio-inline") }}
-            </div>
-        </div>
+.login100-form-btn:hover {
+  background: #0099ff;
+    cursor: pointer
+}
+</style>
 
-        <div class="form-group">
-            {{ render_field(form.description, class_="form-control") }}
-        </div>
+</head>
+<body>
+<ul>
+    <li><a class="active" href="/homepage">Home</a></li>
+    <li><a href="#reportaproblem">Report a Problem</a></li>
+    <li><a href="/login">Login/Register</a></li>
+    <li><a href="/ExcuseForm">Proof for E-Excuse Pass for Train Breakdown</a>
+</ul>
 
-        <div class="form-group">
-            <div class="form-row">
-                <div class="form-group col-md-4">
-                    {{ render_field(form.location, class_="form-control") }}
-                </div>
-                <div class="form-group col-md-4">
-                    {{ render_field(form.datereported, class_="form-control") }}
-                </div>
-                <div class="form-group col-md-4">
-                    {{ render_field(form.status, class_="form-control") }}
-                </div>
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<div class="login100-pic">
+					<img src="/static/images/create.jpg">
+				</div>
 
-            </div>
-        </div>
+				<form class="login100-form" method="post">
+                    <form action="{{url_for('Adminpage')}}" method="post">
+					<span class="login100-form-title">
+						Request form
+					</span>
 
+					<div class="wrap-input100">
+						{{ render_field(form.problem, class='input100') }}
+					</div>
 
+					<div class="wrap-input100">
+						{{ render_field(form.description, class='input100') }}
 
-{#            <div class="form-group">#}
-{#                <div class="form-row">#}
-{#                    <div class="form-group col-md-6">#}
-{#                        {{ render_field(form.issn, class_="form-control") }}#}
-{##}
-{#                    </div>#}
-{#                    <div class="form-group col-md-6">#}
-{#                        {{ render_field(form.frequency, class_="radio-inline") }}#}
-{##}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
+					</div>
 
+					<div class="wrap-input100">
+						{{ render_field(form.location, class='input100') }}
+					</div>
 
-        <div class="form-group">
-            <div class="form-row">
-                <div class="form-group col-md-11">
-
-
-                </div>
-                <div class="form-group col-md-1">
-                    <input type="submit" value="Submit" class="btn btn-info"/>
-                </div>
-            </div>
-        </div>
-
-    </form>
+                    <div class="wrap-input100">
+						{{ render_field(form.date, class='input100') }}
+					</div>
 
 
-{% endblock %}
+					<div class="container-login100-form-btn">
+						{{ form.submit (class = "login100-form-btn", value="Register") }}
+					</div>
+
+					<div class="text-center">
+						<a class="txt2" href="/homepage">
+							Home
+						</a>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
